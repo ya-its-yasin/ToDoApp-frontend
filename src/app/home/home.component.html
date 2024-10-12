@@ -1,0 +1,17 @@
+<p>{{cnt}}</p>
+<button (click)="incre()">+</button>
+<button (click)="decre()">-</button>
+
+<input type="text" [(ngModel)] = "num" >
+
+<div [ngSwitch] = "num" >
+    <div *ngSwitchCase = "'1'" >One</div>
+</div>
+
+<input type="text" [(ngModel)] = "color" >
+
+<div [ngStyle]="{
+    'backgroundColor': color,
+}" >
+   Sample text 
+</div>
