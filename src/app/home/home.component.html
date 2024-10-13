@@ -1,17 +1,57 @@
-<p>{{cnt}}</p>
-<button (click)="incre()">+</button>
-<button (click)="decre()">-</button>
+<button type="button" (click)="doLogout()"> Logout </button>
 
-<input type="text" [(ngModel)] = "num" >
-
-<div [ngSwitch] = "num" >
-    <div *ngSwitchCase = "'1'" >One</div>
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <td>{{task.taskId}}</td>
+                <td>
+                    <input type="text" name = "newTask" [(ngModel)] = "task.description" >
+                </td>
+                <td>
+                    <button type="button" (click)="updateTask(task)"> Update </button>
+                </td>
+                <td>
+                    <button type="button" (click)="completeTask(task.taskId)"> Finish </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<input type="text" [(ngModel)] = "color" >
+<form>
+<input type="text" name = "newTask" [(ngModel)] = "this.task.description" >
+<button type="submit" (click)="addTask()"> Add Task </button>
+</form>
 
-<div [ngStyle]="{
-    'backgroundColor': color,
-}" >
-   Sample text 
+
+
+Show finished task 
+<input type="checkbox" [(ngModel)]="showFinished"  (change)="checkValue()"/>
+
+<div *ngIf="showFinished === true;">
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Tasks</th>
+                    <th>Completed on</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of cTasks">
+                    <td>{{task.taskId}}</td>
+                    <td>{{task.description}}</td>
+                    <td>{{task.completedOn  | date: 'mediumDate'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
